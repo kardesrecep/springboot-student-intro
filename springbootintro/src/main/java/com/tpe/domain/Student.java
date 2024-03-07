@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,13 +41,17 @@ public class Student {
 
  @Column(nullable = false, length = 50, unique = true)
  @Email(message = "Provide valid email")
- /*final*/ private String email; // xxx@yyy.com // sss.com
+ private String email; // xxx@yyy.com // sss.com
 
- /*final*/ private String phoneNumber; // xxx-xxx-xx-xx
+ private String phoneNumber; // xxx-xxx-xx-xx
 
  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm:ss", timezone = "Turkey")
  @Setter(AccessLevel.NONE)
  private LocalDateTime createDate = LocalDateTime.now(); //
+
+
+ @OneToMany(mappedBy = "student")
+ private List<Book> books = new ArrayList<>();
 
 
 }
